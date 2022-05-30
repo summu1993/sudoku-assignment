@@ -1,0 +1,6 @@
+SERVER:
+  ENV: "LOCAL"
+  APP_PORT: "6000"
+
+SUDOKU:
+  SOLVE_SUDOKU_PROXY_URL: "http://localhost:6000"
