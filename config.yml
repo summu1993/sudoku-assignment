@@ -1,6 +1,7 @@
 SERVER:
   ENV: "LOCAL"
-  APP_PORT: "6000"
+  APP_PORT: "8001"
+  REQUEST_ID: ""
 
 SUDOKU:
-  SOLVE_SUDOKU_PROXY_URL: "http://localhost:6000"
+  SOLVE_SUDOKU_PROXY_URL: "http://localhost:8001"

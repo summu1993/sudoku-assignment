@@ -11,8 +11,9 @@ type Configurations struct {
 }
 
 type Server struct {
-	ENV      string
-	APP_PORT string
+	ENV        string
+	APP_PORT   string
+	REQUEST_ID string
 }
 
 type Sudoku struct {
@@ -25,7 +26,6 @@ func GetEnvConfig() {
 		and its reference can be passed from main.go
 
 		configPath := "config/" + env
-
 	*/
 
 	// Set the file name of the configurations file
@@ -44,7 +44,7 @@ func GetEnvConfig() {
 		panic("Couldn't load environment configuration, cannot start. Terminating. Error: " + err.Error())
 	}
 
-	//to unmarshal values into targer global config object
+	// to unmarshal values into target global config object
 	err = viper.Unmarshal(&Vars)
 
 	if err != nil {

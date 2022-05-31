@@ -23,7 +23,6 @@ import (
 */
 
 func main() {
-
 	//load configurations
 	config.GetEnvConfig()
 
@@ -32,4 +31,5 @@ func main() {
 
 	//set application port
 	controllers.Router.Run(":" + config.Vars.SERVER.APP_PORT)
+
 }

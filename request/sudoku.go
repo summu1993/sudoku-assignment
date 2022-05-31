@@ -1,8 +1,14 @@
 package request
 
+import "sudoku-assignment/generics"
+
+type CheckSudokuRequest struct {
+	Board              generics.SudokuBoard `json:"board"`
+	HorizontalPosition int                  `json:"horizontal_position"`
+	VerticalPosition   int                  `json:"vertical_position"`
+	Value              int                  `json:"value"`
+}
+
 type SolveSudokuRequest struct {
-	Board              [][]int `json:"board"`
-	HorizontalPosition string  `json:"horizontal_position"`
-	VerticalPosition   string  `json:"vertical_position"`
-	Value              string  `json:"value"`
+	Board generics.SudokuBoard `json:"board"`
 }
