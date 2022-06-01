@@ -4,4 +4,5 @@ SERVER:
   REQUEST_ID: ""
 
 SUDOKU:
-  SOLVE_SUDOKU_PROXY_URL: "http://localhost:8001"
+  # SOLVE_SUDOKU_PROXY_URL: "http://localhost:8001"
+  SOLVE_SUDOKU_PROXY_URL: "https://salty-woodland-59721.herokuapp.com"
