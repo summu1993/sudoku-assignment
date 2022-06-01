@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"sudoku-assignment/api/controllers"
 	"sudoku-assignment/config"
 )
@@ -29,7 +30,10 @@ func main() {
 	//create API entry points
 	controllers.CreateUrlMappings()
 
+	// for heroku deployment
+	port := os.Getenv("PORT")
+
 	//set application port
-	controllers.Router.Run(":" + config.Vars.SERVER.APP_PORT)
+	controllers.Router.Run(":" + port)
 
 }
