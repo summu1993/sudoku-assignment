@@ -23,6 +23,15 @@ var board = generics.SudokuBoard{
 	{0, 0, 0, 0, 8, 0, 0, 7, 9},
 }
 
+/*
+    AIM:  purpose of this unit test to check if a number placed at any grid is valid or not
+	
+	arg1 is actual sudoku board
+	arg2 is horizonal position in board (x)
+	arg3 is vertical position in board (y)
+	arg4 is value for which we are checking validity
+
+*/
 type addTest struct {
 	arg1     generics.SudokuBoard
 	arg2     int

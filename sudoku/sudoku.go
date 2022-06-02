@@ -40,6 +40,7 @@ func display(board generics.SudokuBoard) {
 		fmt.Println(row)
 	}
 	fmt.Println()
+	return
 }
 
 func IsValidPosition(board generics.SudokuBoard, rowPosition int, columnPosition int, value int) bool {

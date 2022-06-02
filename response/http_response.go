@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 )
 
+//generic response object for all rest APIs
 type HttpResponse struct {
 	RequestId     string `json:"request_id"`
 	ErrorResponse struct {
