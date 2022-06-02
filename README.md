@@ -42,3 +42,8 @@
         vertical_position
         value
 
+
+
+       	Command to run nested test cases 
+    
+        go test ./...
