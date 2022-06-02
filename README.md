@@ -29,6 +29,8 @@
         go mod tidy
         go mod vendor
         go run main.go
+        
+        and change SOLVE_SUDOKU_PROXY_URL key to http://localhost:8001 in config.yml to run it locally
 
         1. curl --location --request GET 'http://localhost:8001/v1/solve' --header 'Service: solve'
         2. curl --location --request GET 'http://localhost:8001/v1/solve' --header 'Service: check' 
