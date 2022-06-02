@@ -5,4 +5,4 @@ SERVER:
 
 SUDOKU:
   # SOLVE_SUDOKU_PROXY_URL: "http://localhost:8001"
-  SOLVE_SUDOKU_PROXY_URL: "https://obscure-coast-90039.herokuapp.com"
+  SOLVE_SUDOKU_PROXY_URL: "https://secure-taiga-05686.herokuapp.com"

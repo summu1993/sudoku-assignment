@@ -1,0 +1,12 @@
+package: .
+import:
+- package: github.com/gin-gonic/gin
+- package: github.com/spf13/viper
+- package: sudoku-assignment/api/controllers
+- package: sudoku-assignment/api/handler
+- package: sudoku-assignment/api/middleware
+- package: sudoku-assignment/config
+- package: sudoku-assignment/generics
+- package: sudoku-assignment/request
+- package: sudoku-assignment/response
+- package: sudoku-assignment/sudoku
