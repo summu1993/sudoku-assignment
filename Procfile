@@ -1,1 +1,1 @@
-web: sudoku
+web: web: bin/sudoku-assignment
