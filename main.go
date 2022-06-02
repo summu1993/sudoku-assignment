@@ -32,9 +32,6 @@ func main() {
 
 	// for heroku deployment
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8001" // Default port if not specified
-	}
 
 	//set application port
 	controllers.Router.Run(":" + port)

@@ -44,7 +44,11 @@ func ReverseProxy(proxyUrl string) gin.HandlerFunc {
 	}
 }
 
-// static logic for reverse proxy to redirect request based on Service Header
+/*
+ TODO: revisit this logic
+       static logic for reverse proxy to redirect request based on Service Header
+*/
+
 func RedirectUrlPath(service string) string {
 	var redirectedPath string
 	if service == "solve" {
