@@ -1,1 +1,1 @@
-web: web: bin/sudoku-assignment
+web: bin/sudoku-assignment
