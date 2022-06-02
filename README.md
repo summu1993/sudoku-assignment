@@ -8,16 +8,22 @@
           is valid or not
 
     API contracts:
-        1. Backend architeture has been written with scalabilty in mind by provided a reverse proxy feature where this current repo will act as entry point and decide where to forward the request
+        1. Backend architeture has been written with scalabilty in mind by provided a reverse proxy feature where this current repo will act as entry   
+           point and decide where to forward the request
 
         2. We can further enhance this feature and add authorization checks or rate limiting for a user.
         
         curl https://sudoku-go-test.herokuapp.com/v1/sudoku --header 'Service: check'
-
+        
+        possible values of Service 
+          i)  solve (solve header will route to /v1/solve/sudoku )
+          ii) check (check header will route to /v1/check/sudoku ) 
+          
+          /v1/check/sudoku - is the endpoint consumed by Frontend
+          
         header Service is mandatory, as redirection logic is decided from Service header only (for now)
     
-
-        Steps to run it locally
+        `Steps to run it locally`
         Run these commands
         
         go mod tidy
