@@ -25,6 +25,7 @@ go.work
 # Temp files
 *.jsonl
 # *.md
+.bin
 
 # Intellij files
 *.idea

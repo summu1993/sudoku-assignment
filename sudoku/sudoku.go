@@ -2,6 +2,7 @@ package sudoku
 
 import (
 	"fmt"
+	"log"
 	"sudoku-assignment/generics"
 )
 
@@ -36,6 +37,7 @@ func SolveSudoku(board generics.SudokuBoard, rowPosition int, columnPosition int
 }
 
 func display(board generics.SudokuBoard) {
+	log.Println("solved sudoku ")
 	for _, row := range board {
 		fmt.Println(row)
 	}

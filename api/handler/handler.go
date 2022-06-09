@@ -59,6 +59,11 @@ func RedirectUrlPath(service string) string {
 	return redirectedPath
 }
 
+/*
+	CHANGES: This API will now accept dimention from user and its comma separated values 
+			 If no sudoku string is passed then it will default to a static test sudoko board
+*/
+
 func SolveSudoku() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var solveSudokuRequest request.SolveSudokuRequest
@@ -71,18 +76,27 @@ func SolveSudoku() gin.HandlerFunc {
 			setError(httpResponse, ctx, bindError.Error())
 			return
 		}
-		// test static sudoku board
-		var board = generics.SudokuBoard{
-			{5, 3, 0, 0, 7, 0, 0, 0, 0},
-			{6, 0, 0, 1, 9, 5, 0, 0, 0},
-			{0, 9, 8, 0, 0, 0, 0, 6, 0},
-			{8, 0, 0, 0, 6, 0, 0, 0, 3},
-			{4, 0, 0, 8, 0, 3, 0, 0, 1},
-			{7, 0, 0, 0, 2, 0, 0, 0, 6},
-			{0, 6, 0, 0, 0, 0, 2, 8, 0},
-			{0, 0, 0, 4, 1, 9, 0, 0, 5},
-			{0, 0, 0, 0, 8, 0, 0, 7, 9},
+		var board [][]int
+
+		if solveSudokuRequest.Board == "" {
+
+			// test static sudoku board if no sudoku board was passed from the query paramater
+
+			board = generics.SudokuBoard{
+				{5, 3, 0, 0, 7, 0, 0, 0, 0},
+				{6, 0, 0, 1, 9, 5, 0, 0, 0},
+				{0, 9, 8, 0, 0, 0, 0, 6, 0},
+				{8, 0, 0, 0, 6, 0, 0, 0, 3},
+				{4, 0, 0, 8, 0, 3, 0, 0, 1},
+				{7, 0, 0, 0, 2, 0, 0, 0, 6},
+				{0, 6, 0, 0, 0, 0, 2, 8, 0},
+				{0, 0, 0, 4, 1, 9, 0, 0, 5},
+				{0, 0, 0, 0, 8, 0, 0, 7, 9},
+			}
+		} else {
+			board = generics.MarshalSudoku(solveSudokuRequest.Board, solveSudokuRequest.Dimension)
 		}
+
 		sudoku.SolveSudoku(board, 0, 0)
 		solveSudokuResponse.Message = "Sudoku has been solved"
 		validResponse, marshalError := json.Marshal(solveSudokuResponse)
@@ -98,6 +112,13 @@ func SolveSudoku() gin.HandlerFunc {
 	}
 }
 
+/*
+    Sudoku board will be passed as comman sparated strings of values
+
+    ASSUMPTION: Number of Values and dimention has to reciprocate
+
+	CHANGES: This API will now accept dimention from user and its comma separated values
+*/
 func CheckSudokuValidity() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var sudokuRequest request.CheckSudokuRequest
@@ -112,7 +133,7 @@ func CheckSudokuValidity() gin.HandlerFunc {
 			return
 		}
 
-		board := sudokuRequest.Board
+		board := generics.MarshalSudoku(sudokuRequest.Board, sudokuRequest.Dimension)
 		horizontalPosition := sudokuRequest.HorizontalPosition
 		verticalPosition := sudokuRequest.VerticalPosition
 		value := sudokuRequest.Value
@@ -123,7 +144,7 @@ func CheckSudokuValidity() gin.HandlerFunc {
 
 		// handling error while marshalling the response object
 		if marshalError != nil {
-			log.Println("error in sudokuRequest marshal " + bindError.Error())
+			log.Println("error in sudokuRequest marshal " + marshalError.Error())
 			setError(httpResponse, ctx, marshalError.Error())
 		}
 

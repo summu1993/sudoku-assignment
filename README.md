@@ -22,6 +22,11 @@
           /v1/check/sudoku - is the endpoint consumed by Frontend
           
         header Service is mandatory, as redirection logic is decided from Service header only (for now)
+        
+        ** Possible value of Service header are **
+        1. solve
+        2. check
+
     
         `Steps to run it locally`
         Run these commands
@@ -32,15 +37,42 @@
         
         and change SOLVE_SUDOKU_PROXY_URL key to http://localhost:8001 in config.yml to run it locally
 
-        1. curl --location --request GET 'http://localhost:8001/v1/solve' --header 'Service: solve'
-        2. curl --location --request GET 'http://localhost:8001/v1/solve' --header 'Service: check' 
 
-        Query parameter for 2nd request  (board = a 2D matrix)
-        
-        board
-        horizontal_position 
-        vertical_position
-        value
+     # Changes made to make it more scalable
+
+
+       1. API's will not accept dimention as well with user input comma seaparted sudoku board
+          
+
+       --- 
+       I could have made this API a POST verb, so make url parameter more elegant, but we not creating any resource on server/database as of now so kept it GET request for now. 
+
+        **Purpose of this API to solve a given Sudoku**
+
+       `curl --location --request GET 'http://localhost:8001/v1/sudoku?board="5,3,0,0,7,0,0,0,0,6,0,0,1,9,5,0,0,0,0,9,8,0,0,0,0,6,0,8,0,0,0,6,0,0,0,3,4,0,0,8,0,3,0,0,1,7,0,0,0,2,0,0,0,6,0,6,0,0,0,0,2,8,0,0,0,0,4,1,9,0,0,5,0,0,0,0,8,0,0,7,9"&dimension=9' \
+       --header 'Service: solve'`
+
+       Query parameters
+       `board` and `dimension`
+
+       Mandatory header
+       `Service : solve`
+
+       	---
+ 
+         **Purpose of this API to check the validity of a number entered by a player at a specific position (row and column value) **
+
+        `curl --location --request GET 'http://localhost:8001/v1/sudoku?board="5,3,0,0,7,0,0,0,0,6,0,0,1,9,5,0,0,0,0,9,8,0,0,0,0,6,0,8,0,0,0,6,0,0,0,3,4,0,0,8,0,3,0,0,1,7,0,0,0,2,0,0,0,6,0,6,0,0,0,0,2,8,0,0,0,0,4,1,9,0,0,5,0,0,0,0,8,0,0,7,9"&horizontalPosition=1&verticalPosition=2&value=2&dimension=9' \
+        --header 'Service: check'`
+
+
+        Query parameters
+       `board` , `dimension` , `horizontalPosition` , `verticalPosition` , `value`
+
+       Mandatory header
+       `Service : check`
+
+
 
 
 
