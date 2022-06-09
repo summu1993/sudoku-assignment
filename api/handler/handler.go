@@ -60,7 +60,7 @@ func RedirectUrlPath(service string) string {
 }
 
 /*
-	CHANGES: This API will now accept dimention from user and its comma separated values 
+	CHANGES: This API will now accept dimention from user and its comma separated values
 			 If no sudoku string is passed then it will default to a static test sudoko board
 */
 
@@ -77,6 +77,7 @@ func SolveSudoku() gin.HandlerFunc {
 			return
 		}
 		var board [][]int
+		var boardError error
 
 		if solveSudokuRequest.Board == "" {
 
@@ -94,7 +95,16 @@ func SolveSudoku() gin.HandlerFunc {
 				{0, 0, 0, 0, 8, 0, 0, 7, 9},
 			}
 		} else {
-			board = generics.MarshalSudoku(solveSudokuRequest.Board, solveSudokuRequest.Dimension)
+			board, boardError = generics.MarshalSudoku(solveSudokuRequest.Board, solveSudokuRequest.Dimension)
+		}
+
+		if boardError != nil {
+			httpResponse.RequestId = config.Vars.SERVER.REQUEST_ID
+			httpResponse.ErrorResponse.Message = "dimention and grid values doesnt match"
+			httpResponse.ErrorResponse.Code = http.StatusBadRequest
+			ctx.JSON(http.StatusBadRequest, httpResponse)
+			ctx.Abort()
+
 		}
 
 		sudoku.SolveSudoku(board, 0, 0)
@@ -133,7 +143,16 @@ func CheckSudokuValidity() gin.HandlerFunc {
 			return
 		}
 
-		board := generics.MarshalSudoku(sudokuRequest.Board, sudokuRequest.Dimension)
+		board, boardError := generics.MarshalSudoku(sudokuRequest.Board, sudokuRequest.Dimension)
+		if boardError != nil {
+			httpResponse.RequestId = config.Vars.SERVER.REQUEST_ID
+			httpResponse.ErrorResponse.Message = "dimention and grid values doesnt match"
+			httpResponse.ErrorResponse.Code = http.StatusBadRequest
+			ctx.JSON(http.StatusBadRequest, httpResponse)
+			ctx.Abort()
+			return
+		}
+
 		horizontalPosition := sudokuRequest.HorizontalPosition
 		verticalPosition := sudokuRequest.VerticalPosition
 		value := sudokuRequest.Value
