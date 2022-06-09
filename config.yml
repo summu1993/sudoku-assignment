@@ -4,5 +4,5 @@ SERVER:
   REQUEST_ID: ""
 
 SUDOKU:
-  SOLVE_SUDOKU_PROXY_URL: "http://localhost:8001"
-  # SOLVE_SUDOKU_PROXY_URL: "https://sudoku-go-test.herokuapp.com"
+  # SOLVE_SUDOKU_PROXY_URL: "http://localhost:8001"
+  SOLVE_SUDOKU_PROXY_URL: "https://sudoku-go-test.herokuapp.com"
